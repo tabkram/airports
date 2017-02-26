@@ -15,19 +15,17 @@ import static spark.Spark.get;
 public final class AirportService {
 
     public static void serve() {
-        get("/airports/:country",  (request, response) -> {
+        get("api/rest/countries/:country/airports",  (request, response) -> {
             AirportRepo repo = new AirportRepo();
             CountryRepo countryRepo = new CountryRepo();
             String countryParam = request.params(":country");
             if(countryParam.length() == 2){
                 Country country = countryRepo.getCountryByCountryCode(request.params(":country"));
-                return repo.getAirportsByCountryCode(request.params(":country"));
+                return repo.getAirportsAndRunwaysByCountryCode(request.params(":country"));
             } else {
                 Country country = countryRepo.getCountryByCountryName(request.params(":country"));
-                return repo.getAirportsByCountryCode(country.getCode());
+                return repo.getAirportsAndRunwaysByCountryCode(country.getCode());
             }
-            "/:country""
-
         }, json());
     }
 }

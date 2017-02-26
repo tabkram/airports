@@ -4,6 +4,8 @@ import net.tabka.akram.model.Country;
 import net.tabka.akram.repository.AirportRepo;
 import net.tabka.akram.repository.CountryRepo;
 import net.tabka.akram.service.AirportService;
+import net.tabka.akram.service.CountryService;
+import net.tabka.akram.service.RunwayService;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
@@ -31,6 +33,8 @@ public class AirportsServerBoot {
         initConfigfile();
         port(Integer.parseInt(properties.getProperty("port","8080")));
         externalStaticFileLocation(properties.getProperty("webapp"));
+        CountryService.serve();
         AirportService.serve();
+        RunwayService.serve();
     }
 }

@@ -1,6 +1,7 @@
 package net.tabka.akram.model;
 
 
+import java.util.List;
 import java.util.Optional;
 
 public class Airport {
@@ -21,8 +22,10 @@ public class Airport {
     String local_code;
     String home_link;
     String wikipedia_link;
+    String keywords;
+    List<Runway> runways;
 
-    public Airport(Optional<String> id, Optional<String> ident, Optional<String> type, Optional<String> name, Optional<String> latitude_deg, Optional<String> longitude_deg, Optional<String> elevation_ft, Optional<String> continent, Optional<String> iso_country, Optional<String> iso_region, Optional<String> municipality, Optional<String> scheduled_service, Optional<String> gps_code, Optional<String> iata_code, Optional<String> local_code, Optional<String> home_link, Optional<String> wikipedia_link, Optional<String> keywords) {
+    public Airport(Optional<String> id, Optional<String> ident, Optional<String> type, Optional<String> name, Optional<String> latitude_deg, Optional<String> longitude_deg, Optional<String> elevation_ft, Optional<String> continent, Optional<String> iso_country, Optional<String> iso_region, Optional<String> municipality, Optional<String> scheduled_service, Optional<String> gps_code, Optional<String> iata_code, Optional<String> local_code, Optional<String> home_link, Optional<String> wikipedia_link, Optional<String> keywords , Optional<List<Runway>> runways) {
         id.ifPresent( x -> this.id = Integer.parseInt(x));
         ident.ifPresent( x -> this.ident = x);
         type.ifPresent( x -> this.type = x);
@@ -41,6 +44,7 @@ public class Airport {
         home_link.ifPresent( x -> this.home_link = x);
         wikipedia_link.ifPresent( x -> this.wikipedia_link = x);
         keywords.ifPresent( x -> this.keywords = x);
+        runways.ifPresent( x -> this.runways = x);
     }
 
     public Integer getId() {
@@ -187,5 +191,12 @@ public class Airport {
         this.keywords = keywords;
     }
 
-    String keywords;
+    public List<Runway> getRunways() {
+        return runways;
+    }
+
+    public void setRunways(List<Runway> runways) {
+        this.runways = runways;
+    }
+
 }
