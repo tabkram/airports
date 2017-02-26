@@ -1,11 +1,17 @@
 package net.tabka.akram.boot;
 
+import net.tabka.akram.model.Country;
 import net.tabka.akram.repository.AirportRepo;
+import net.tabka.akram.repository.CountryRepo;
+import net.tabka.akram.service.AirportService;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 import java.io.IOException;
 import java.util.Properties;
+
+import static net.tabka.akram.utils.JsonUtil.json;
+import static spark.Spark.*;
 
 public class AirportsServerBoot {
 
@@ -23,22 +29,8 @@ public class AirportsServerBoot {
     public static void main( String[] args ) throws Exception
     {
         initConfigfile();
-        Server server = new Server(Integer.parseInt(properties.getProperty("port","8080")));
-        airportServe();
-        WebAppContext context = new WebAppContext();
-        context.setResourceBase(properties.getProperty("webapp"));
-        context.setContextPath("/");
-        context.setServer(server);
-        server.setHandler(context);
-        server.start();
-        server.dumpStdErr();
-        server.join();
-
-
-    }
-
-    public static void airportServe(){
-        AirportRepo repo = new AirportRepo();
-        repo.request();
+        port(Integer.parseInt(properties.getProperty("port","8080")));
+        externalStaticFileLocation(properties.getProperty("webapp"));
+        AirportService.serve();
     }
 }
