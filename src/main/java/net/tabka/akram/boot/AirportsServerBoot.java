@@ -1,10 +1,10 @@
 package net.tabka.akram.boot;
 
+import net.tabka.akram.repository.AirportRepo;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
-import java.io.FileInputStream;
+
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 public class AirportsServerBoot {
@@ -24,15 +24,21 @@ public class AirportsServerBoot {
     {
         initConfigfile();
         Server server = new Server(Integer.parseInt(properties.getProperty("port","8080")));
-
+        airportServe();
         WebAppContext context = new WebAppContext();
         context.setResourceBase(properties.getProperty("webapp"));
         context.setContextPath("/");
         context.setServer(server);
         server.setHandler(context);
-
         server.start();
         server.dumpStdErr();
         server.join();
+
+
+    }
+
+    public static void airportServe(){
+        AirportRepo repo = new AirportRepo();
+        repo.request();
     }
 }

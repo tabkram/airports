@@ -3,10 +3,10 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
   'ngRoute',
+  "angucomplete-alt",
   'myApp.query',
   'myApp.reports',
   'myApp.version',
-  "angucomplete"
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
