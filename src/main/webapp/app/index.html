@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="app.css">
   <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css">
+  <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
@@ -24,22 +26,28 @@
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
-
-  <div ng-view></div>
-
-  <div>Airports app: v<span app-version></span></div>
-
+  <div class="container-fluid">
+  <div class="row-fluid">
+    <div ng-view></div>
+  </div>
+  <div class="row-fluid">
+    <div>Airports app: v<span app-version></span></div>
+  </div>
+  </div>
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <script src="bower_components/angucomplete-alt/dist/angucomplete-alt.min.js"></script>
   <script src="app.js"></script>
   <script src="query/query.js"></script>
+  <script src="query/query.service.js"></script>
   <script src="reports/reports.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
-  <script src="bower_components/angucomplete-alt/dist/angucomplete-alt.min.js"></script>
 </body>
 </html>

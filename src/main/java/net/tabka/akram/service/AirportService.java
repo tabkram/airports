@@ -21,10 +21,10 @@ public final class AirportService {
             String countryParam = request.params(":country");
             if(countryParam.length() == 2){
                 Country country = countryRepo.getCountryByCountryCode(request.params(":country"));
-                return repo.getAirportsAndRunwaysByCountryCode(request.params(":country"));
+                return repo.getAirportsByCountryCode(request.params(":country"));
             } else {
                 Country country = countryRepo.getCountryByCountryName(request.params(":country"));
-                return repo.getAirportsAndRunwaysByCountryCode(country.getCode());
+                return repo.getAirportsByCountryCode(country.getCode());
             }
         }, json());
     }

@@ -1,13 +1,62 @@
 <h1>Query section</h1>
-<div angucomplete-alt
-     id="ex5"
-     placeholder="Search country"
-     pause="500"
-     selected-object="selectedCountry"
-     remote-url="api/rest/countries/"
-     title-field="name"
-     description-field="code"
-     minlength="3"
-     input-class="form-control form-control-small"
-     match-class="highlight">
+<div class="row-fluid">
+    <div angucomplete-alt
+               id="ex5"
+               placeholder="Search country"
+               pause="500"
+               selected-object="selectedCountry"
+               remote-url="api/rest/countries/"
+               title-field="name"
+               description-field="code"
+               minlength="3"
+               input-class="form-control form-control-small"
+               match-class="highlight">
+</div>
+</div>
+<div class="row-fluid">
+    <div class="col-md-5">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="airport in airports">
+                <a ng-click="getRunways(airport.ident)">
+                {{airport.id}}
+                {{airport.ident}}
+                {{airport.name}}
+                {{airport.continent}}
+                {{airport.AF}}
+                {{airport.iso_region}}
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-7">
+        <h3 ng-if="runwways.length==0">No runways found</h3>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="runwway in runwways">
+                {{runwway.id}}
+                {{runwway.he_displaced_threshold_ft}}
+                He : {{runwway.he_elevation_ft}}
+                {{runwway.he_heading_degT}}
+                {{runwway.he_ident}}
+                {{runwway.he_latitude_deg}}
+                {{runwway.he_longitude_deg}}
+                le :
+                {{runwway.le_displaced_threshold_ft}}
+                {{runwway.le_elevation_ft}}
+                {{runwway.le_heading_degT}}
+                {{runwway.le_ident}}
+                {{runwway.le_latitude_deg}}
+                {{runwway.le_longitude_deg}}
+                ---
+                {{runwway.length_ft}}
+                {{runwway.lighted}}
+                {{runwway.surface}}
+                {{runwway.width_ft}}
+                {{runwway.ident}}
+                {{runwway.name}}
+                {{runwway.continent}}
+                {{runwway.AF}}
+                {{runwway.iso_region}}
+            </li>
+        </ul>
+    </div>
 </div>
