@@ -20,3 +20,6 @@ example http://localhost:8080/api/rest/countries/Tunisia/airports
 http://localhost:8080/api/rest/airports/:ident/runways
 
 example http://localhost:8080/api/rest/airports/DTTA/runways
+
+
+http://localhost:8080/api/rest/airports?order=false&max=2

@@ -1,5 +1,7 @@
 package net.tabka.akram.model;
 
+import com.sugarcrm.ws.soap.Int;
+
 import java.util.Optional;
 
 public class Country {
@@ -10,6 +12,8 @@ public class Country {
     String continent;
     String wikipedia_link;
     String keywords;
+
+    Long AirportsNumber;
 
     public Country(Optional<String> id, Optional<String> code, Optional<String> name, Optional<String> continent, Optional<String> wikipedia_link, Optional<String> keywords) {
         id.ifPresent( x -> this.id = Integer.parseInt(x));
@@ -69,4 +73,11 @@ public class Country {
         this.keywords = keywords;
     }
 
+    public Long getAirportsNumber() {
+        return AirportsNumber;
+    }
+
+    public void setAirportsNumber(Long airportsNumber) {
+        AirportsNumber = airportsNumber;
+    }
 }
