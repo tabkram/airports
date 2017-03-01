@@ -9,6 +9,12 @@ import static spark.Spark.get;
 public class CountryService {
 
     public static void serve() {
+
+        get("api/rest/countries",  (request, response) -> {
+            CountryRepo repo = new CountryRepo();
+            return repo.getAllCountries();
+        }, json());
+
         get("api/rest/countries/:country",  (request, response) -> {
             CountryRepo repo = new CountryRepo();
             String countryParam = request.params(":country");

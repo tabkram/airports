@@ -2,6 +2,7 @@ package net.tabka.akram.model;
 
 import com.sugarcrm.ws.soap.Int;
 
+import java.util.List;
 import java.util.Optional;
 
 public class Country {
@@ -14,6 +15,7 @@ public class Country {
     String keywords;
 
     Long AirportsNumber;
+    List<String> runwayTypes;
 
     public Country(Optional<String> id, Optional<String> code, Optional<String> name, Optional<String> continent, Optional<String> wikipedia_link, Optional<String> keywords) {
         id.ifPresent( x -> this.id = Integer.parseInt(x));
@@ -79,5 +81,13 @@ public class Country {
 
     public void setAirportsNumber(Long airportsNumber) {
         AirportsNumber = airportsNumber;
+    }
+
+    public List<String> getRunwayTypes() {
+        return runwayTypes;
+    }
+
+    public void setRunwayTypes(List<String> runwayTypes) {
+        this.runwayTypes = runwayTypes;
     }
 }

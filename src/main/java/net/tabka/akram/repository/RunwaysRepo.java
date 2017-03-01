@@ -2,17 +2,17 @@ package net.tabka.akram.repository;
 
 import net.tabka.akram.model.Airport;
 import net.tabka.akram.model.Country;
+import net.tabka.akram.model.Identification;
 import net.tabka.akram.model.Runway;
 import org.apache.metamodel.DataContext;
+import org.apache.metamodel.MetaModelHelper;
 import org.apache.metamodel.data.DataSet;
 import org.apache.metamodel.data.Row;
 import org.apache.metamodel.query.Query;
 import org.apache.metamodel.schema.Column;
 import org.apache.metamodel.schema.Table;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Created by akram.tabka on 26/02/2017.
@@ -25,6 +25,11 @@ public class RunwaysRepo {
         Repository runwayRepo = new Repository("runways.csv");
         table = runwayRepo.getTable();
         dataContext = runwayRepo.getDataContext();
+    }
+
+    public DataSet getRunwaysDataSet(){
+        Query query = dataContext.query().from(table).selectAll().toQuery();
+        return dataContext.executeQuery(query);
     }
 
     public List<Runway> getRunwaysByAirport(String airport_ident){
@@ -60,4 +65,41 @@ public class RunwaysRepo {
         return runwayList;
     }
 
+
+    public static Set<String> getRunwayTypesByCounty(String country) {
+        AirportRepo airepo = new AirportRepo();
+        List<Airport> airports = airepo.getAirportsAndRunwaysByCountryCode(country);
+        Set<String> runwayTypes = new HashSet<>();
+        airports.forEach(airport -> {
+            airport.getRunways().forEach(runway -> {
+                runwayTypes.add(runway.getSurface());
+            });
+        });
+        return runwayTypes;
+    }
+
+    public List<Identification> getRunwaysIdentifications(Optional<Boolean> isReversed, Optional<Integer> maxNumber){
+        Column indentCol = table.getColumnByName("le_ident");
+        Query query = dataContext.query().from(table).select(indentCol).selectCount().groupBy(indentCol).toQuery();
+        DataSet ds = dataContext.executeQuery(query);
+        List<Identification> indentList = new ArrayList<>();
+        while (ds.next()) {
+            Row row = ds.getRow();
+            indentList.add(new Identification((String) row.getValue(0),(Long) row.getValue(1)));
+        }
+
+        if(isReversed.isPresent()) {
+            if (isReversed.get()) {
+                indentList.sort(Comparator.comparing((Identification a) -> a.getNumber()).reversed());
+            } else {
+                indentList.sort(Comparator.comparing((Identification a) -> a.getNumber()));
+            }
+        }
+
+        if (maxNumber.isPresent()){
+            return indentList.subList(0, maxNumber.get());
+        } else {
+            return indentList;
+        }
+    }
 }

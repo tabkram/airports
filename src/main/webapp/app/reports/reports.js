@@ -9,6 +9,8 @@ angular.module('myApp.reports', ['ngRoute'])
   });
 }])
 
-.controller('reportsCtrl', [function() {
-
+.controller('reportsCtrl', ['$scope', 'ReportsService', function($scope, ReportsService) {
+  ReportsService.getAllCountries().then(function(reponse){
+    $scope.countries = reponse.data ;
+  });
 }]);
