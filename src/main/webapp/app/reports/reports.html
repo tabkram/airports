@@ -1,5 +1,12 @@
-<p>Reports section.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<h1>Reports section</h1>
+<div class="row-fluid">
+  <div class="col-md-5">
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="country in countries">
+        <a ng-click="getRunways(airport.ident)">
+          {{airport.name}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

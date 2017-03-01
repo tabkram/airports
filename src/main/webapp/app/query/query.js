@@ -12,7 +12,7 @@ angular.module('myApp.query', ['ngRoute'])
 .controller('queryCtrl', ["$scope","QueryService", function($scope, QueryService) {
 
     $scope.selectedCountry = function(selection){
-        console.log( QueryService.findAirports(selection.originalObject.code));
+        console.log(QueryService.findAirports(selection.originalObject.code));
         QueryService.findAirports(selection.originalObject.code).then(function(reponse){
            $scope.airports = reponse.data ;
         });
