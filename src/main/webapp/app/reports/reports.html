@@ -1,12 +1,55 @@
 <h1>Reports section</h1>
 <div class="row-fluid">
-  <div class="col-md-5">
-    <ul class="list-group">
-      <li class="list-group-item" ng-repeat="country in countries">
-        <a ng-click="getRunways(airport.ident)">
-          {{airport.name}}
-        </a>
-      </li>
-    </ul>
+  <uib-tabset active="active">
+    <uib-tab index="0" heading="Number of airports">
+      <div class="row-fluid" style="margin-top: 15px">
+      <div class="col-md-6">
+        <h2>highest number of airports</h2>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="countryAirports in highestAirportsNumber">
+              {{countryAirports.code}} - {{countryAirports.name}} - {{countryAirports.continent}} <span class="badge badge-info">{{countryAirports.AirportsNumber}}</span>
+          </li>
+        </ul>
+      </div>
+        <div class="col-md-6">
+          <h2>lowest number of airports</h2>
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="countryAirports in lowestAirportsNumber">
+              {{countryAirports.code}} - {{countryAirports.name}} - {{countryAirports.continent}} <span class="badge badge-info">{{countryAirports.AirportsNumber}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </uib-tab>
+    <uib-tab index="1" heading="Runway Types">
+      <div class="col-md-5" style="max-height: 488px;overflow: auto; margin-top: 15px">
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="country in countries">
+            <a ng-click="getRunwayTypes(country)">
+              {{country.code}} - {{country.name}} - {{country.continent}}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-7" >
+        <ul class="list-group">
+          <h2 ng-if="selectedCountry">{{selectedCountry.code}} - {{selectedCountry.name}}</h2>
+          <li class="list-group-item" ng-repeat="type in runwayTypes">
+            {{type}}
+          </li>
+        </ul>
+      </div>
+    </uib-tab>
+    <uib-tab index="2" heading="Most common runway identifications">
+      <div class="row-fluid" style="margin-top: 15px">
+        <div class="col-md-offset-2 col-md-8 col-md-offset-2">
+          <h2>common Runways</h2>
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="commonRunway in commonRunways">
+              <b>{{commonRunway.indentification}}</b> <span class="badge badge-info">{{commonRunway.number}}</span>
+            </li>
+          </ul>
+        </div>
+    </uib-tab>
+  </uib-tabset>
   </div>
-</div>

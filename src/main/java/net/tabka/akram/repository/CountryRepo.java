@@ -78,6 +78,7 @@ public class CountryRepo {
         Column column = table.getColumnByName(ColumnName);
         Query query = dataContext.query().from(table).selectAll().where(column).eq(ColumnValue).toQuery();
         DataSet ds = dataContext.executeQuery(query);
+        ds.next();
         Row row = ds.getRow();
         return new Country(
                 Optional.of((String) row.getValue(table.getColumnByName("id"))),

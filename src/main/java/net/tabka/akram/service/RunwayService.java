@@ -22,9 +22,10 @@ public class RunwayService {
             return runwaysRepo.getRunwaysByAirport(runwayParam);
         }, json());
 
-        get("api/rest/countries/runways/types",  (request, response) -> {
+        get("api/rest/countries/:country/runways/types",  (request, response) -> {
             RunwaysRepo repo = new RunwaysRepo();
-            return repo.getRunwayTypesByCounty("TN");
+            String countryParam = request.params(":country");
+            return repo.getRunwayTypesByCounty(countryParam);
         }, json());
 
         get("api/rest/runways/identifications",  (request, response) -> {
